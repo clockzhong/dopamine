@@ -17,8 +17,11 @@ DQNAgent.epsilon_decay_period = 250000  # agent steps
 DQNAgent.tf_device = '/gpu:0'  # use '/cpu:*' for non-GPU version
 DQNAgent.optimizer = @tf.train.RMSPropOptimizer()
 
+MyGinClass.testValue = 30
+MyGinClass.myOpt = @tf.train.RMSPropOptimizer()
+
 tf.train.RMSPropOptimizer.learning_rate = 0.00025
-tf.train.RMSPropOptimizer.decay = 0.95
+tf.train.RMSPropOptimizer.decay = 0.999993333333
 tf.train.RMSPropOptimizer.momentum = 0.0
 tf.train.RMSPropOptimizer.epsilon = 0.00001
 tf.train.RMSPropOptimizer.centered = True
@@ -33,3 +36,5 @@ Runner.max_steps_per_episode = 27000  # agent steps
 
 WrappedReplayBuffer.replay_capacity = 1000000
 WrappedReplayBuffer.batch_size = 32
+
+

@@ -17,11 +17,17 @@ import tensorflow as tf
 from tensorflow.test import *
 import os
 import shutil
+import gin
 
 class GinTests(TestCase):
     def setUp(self):
         pass
-    def testSampels(self):
+    def testSampelsGin(self):
+        ginFiles = ['tests/ClockTests/ginTest.gin']
+        gin.parse_config_files_and_bindings(ginFiles, [],skip_unknown=False)
+        myOpt = tf.train.RMSPropOptimizer(learning_rate=0.002)
+        print myOpt._learning_rate
+        print myOpt._decay
         pass
 
 if __name__ == '__main__':

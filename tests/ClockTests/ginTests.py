@@ -22,6 +22,7 @@ import gin
 @gin.configurable
 class MyGinClass(object):
     def __init__(self,
+                 noInitValue,
                  testValue = 0,
                  myOpt=tf.train.RMSPropOptimizer(
                      learning_rate=0.00025,
@@ -31,6 +32,7 @@ class MyGinClass(object):
                      centered=True)):
         self.testValue = testValue
         self.myOpt = myOpt
+        self.noInitValue = noInitValue
 
 class GinTests(TestCase):
     @classmethod
@@ -47,7 +49,12 @@ class GinTests(TestCase):
     def testMyGinClass(self):
         #because MyGinClass is defined with @gin.configurable, and also defined related values in tests/ClockTests/ginTest.gin,
         #so I could check their values
-        myObj = MyGinClass()
+        myObj = MyGinClass(noInitValue=33)
+
+        #This should fail
+        #myObj = MyGinClass()
+
+        self.assertEqual(myObj.noInitValue, 33)
         self.assertEqual(myObj.testValue, 30)
         self.assertEqual(myObj.myOpt._decay, 0.999993333333)
         #print myObj.testValue
